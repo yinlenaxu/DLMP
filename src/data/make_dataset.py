@@ -79,7 +79,7 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
 
     # create csv file
     fault_fixing_commits.to_csv(output_filepath+'/fault_commits.csv', index = False)
-    refactor_commits.to_csv(output_filepath+'../data/processed/refactor_commits.csv', index = False)
+    refactor_commits.to_csv(output_filepath+'/refactor_commits.csv', index = False)
 
 
 @click.command()
