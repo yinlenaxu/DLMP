@@ -4,12 +4,13 @@ import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 
+import sqlite3
 import pandas as pd
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes):
+def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes, output_filepath):
     '''
     Returns a preprocessed dataframe
     :Params:
@@ -77,21 +78,21 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
     fault_fixing_commits = fault_fixing_commits.drop("COMMIT_HASH", axis=1)
 
     # create csv file
-    fault_fixing_commits.to_csv(r'../data/processed/fault_commits.csv', index = False)
-    refactor_commits.to_csv(r'../data/processed/refactor_commits.csv', index = False)
+    fault_fixing_commits.to_csv(output_filepath+'/fault_commits.csv', index = False)
+    refactor_commits.to_csv(output_filepath+'../data/processed/refactor_commits.csv', index = False)
 
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
 @click.argument('output_filepath', type=click.Path())
-def main(input_filepath, output_filepath):
+def main(input_filepath = '../../data/raw', output_filepath = '../../data/processed'):  # modified
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
     logger = logging.getLogger(__name__)
     logger.info('making final data set from raw data')
 
-    conn = sqlite3.connect('../../data/raw/td_V2.db')
+    conn = sqlite3.connect(input_filepath+'/td_V2.db')
     git_commits = pd.read_sql_query("SELECT * FROM GIT_COMMITS",conn)
     szz_fault_inducing_commits = pd.read_sql_query("SELECT * FROM szz_fault_inducing_commits",conn)
     refactoring_miner = pd.read_sql_query("SELECT * FROM refactoring_miner",conn)
@@ -99,7 +100,7 @@ def main(input_filepath, output_filepath):
     git_commits_changes = pd.read_sql_query("SELECT * FROM GIT_COMMITS_CHANGES", conn)
     git_commits_changes = git_commits_changes[git_commits_changes["COMMIT_HASH"].isin(refactoring_miner["COMMIT_HASH"])]
 
-    preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes)
+    preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes, output_filepath)
 
 
 if __name__ == '__main__':
