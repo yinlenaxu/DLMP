@@ -10,7 +10,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes, output_filepath):
+def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes,inter_output_filepath, output_filepath):
     '''
     Returns a preprocessed dataframe
     :Params:
@@ -78,14 +78,21 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
     fault_fixing_commits = fault_fixing_commits.drop("COMMIT_HASH", axis=1)
 
     # create csv file
+    
+    git_commits.to_csv(inter_output_filepath+'/git_commits.csv', index = False)
+    szz_fault_inducing_commits.to_csv(inter_output_filepath+'/szz_fault_inducing_commits.csv', index = False)
+    refactoring_miner.to_csv(inter_output_filepath+'/refactoring_miner.csv', index = False)
+    git_commits_changes.to_csv(inter_output_filepath+'/git_commits_changes.csv', index = False)
+    
     fault_fixing_commits.to_csv(output_filepath+'/fault_commits.csv', index = False)
     refactor_commits.to_csv(output_filepath+'/refactor_commits.csv', index = False)
 
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
+@click.argument('inter_output_filepath', type=click.Path())
 @click.argument('output_filepath', type=click.Path())
-def main(input_filepath = '../../data/raw', output_filepath = '../../data/processed'):  # modified
+def main(input_filepath = '../../data/raw', inter_output_filepath = '../../data/interim', output_filepath = '../../data/processed'):  # modified
     """ Runs data processing scripts to turn raw data from (../raw) into
         cleaned data ready to be analyzed (saved in ../processed).
     """
@@ -100,7 +107,7 @@ def main(input_filepath = '../../data/raw', output_filepath = '../../data/proces
     git_commits_changes = pd.read_sql_query("SELECT * FROM GIT_COMMITS_CHANGES", conn)
     git_commits_changes = git_commits_changes[git_commits_changes["COMMIT_HASH"].isin(refactoring_miner["COMMIT_HASH"])]
 
-    preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes, output_filepath)
+    preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_commits_changes,inter_output_filepath, output_filepath)
 
 
 if __name__ == '__main__':
