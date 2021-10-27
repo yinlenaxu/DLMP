@@ -23,6 +23,13 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
           This dataframe is thought to be used to train models to predict whether a refactor is going to induce a fault or not
     '''
 
+    # create raw .csv file
+
+    git_commits.to_csv(inter_output_filepath+'/git_commits.csv', index = False)
+    szz_fault_inducing_commits.to_csv(inter_output_filepath+'/szz_fault_inducing_commits.csv', index = False)
+    refactoring_miner.to_csv(inter_output_filepath+'/refactoring_miner.csv', index = False)
+    git_commits_changes.to_csv(inter_output_filepath+'/git_commits_changes.csv', index = False)
+
     # keep columns and rows of interest of each dataframe individually and change formats
 
     git_commits = git_commits[['PROJECT_ID','COMMIT_HASH','COMMIT_MESSAGE','COMMITTER_DATE','BRANCHES']]
@@ -33,6 +40,8 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
     git_commits_changes["LINES_ADDED"] = git_commits_changes["LINES_ADDED"].astype(int)
     git_commits_changes["LINES_REMOVED"] = git_commits_changes["LINES_REMOVED"].astype(int)
     git_commits_changes = git_commits_changes.groupby(['COMMIT_HASH', "PROJECT_ID"]).sum().reset_index()
+
+    # processing
 
     git_commits['NUM_COMMIT'] = 0
     for proj in git_commits.PROJECT_ID.unique().tolist():
@@ -72,18 +81,14 @@ def preprocess(git_commits, szz_fault_inducing_commits, refactoring_miner, git_c
     refactor_commits["LABEL"] = np.where(refactor_commits["COMMIT_HASH"].isin(szz_fault_inducing_commits["FAULT_INDUCING_COMMIT_HASH"]), 1, 0)
 
     # merge of dataframes
+    
     refactoring_fault_inducing = refactoring_miner.merge(szz_fault_inducing_commits, left_on="COMMIT_HASH", right_on="FAULT_INDUCING_COMMIT_HASH")
     refactoring_fault_inducing = refactoring_fault_inducing.drop("COMMIT_HASH", axis=1)
     fault_fixing_commits = refactoring_fault_inducing.merge(git_commits, left_on="FAULT_FIXING_COMMIT_HASH", right_on="COMMIT_HASH")
     fault_fixing_commits = fault_fixing_commits.drop("COMMIT_HASH", axis=1)
 
     # create csv file
-    
-    git_commits.to_csv(inter_output_filepath+'/git_commits.csv', index = False)
-    szz_fault_inducing_commits.to_csv(inter_output_filepath+'/szz_fault_inducing_commits.csv', index = False)
-    refactoring_miner.to_csv(inter_output_filepath+'/refactoring_miner.csv', index = False)
-    git_commits_changes.to_csv(inter_output_filepath+'/git_commits_changes.csv', index = False)
-    
+
     fault_fixing_commits.to_csv(output_filepath+'/fault_commits.csv', index = False)
     refactor_commits.to_csv(output_filepath+'/refactor_commits.csv', index = False)
 
