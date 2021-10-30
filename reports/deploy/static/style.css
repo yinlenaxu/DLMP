@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: 'Alata', sans-serif;
+}
+
+.wrapper {
+    height: 100vh;
+}
+
+.footer {
+    position: absolute;
+    padding: 0 2em 1em;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #A2A2A2;
+    bottom: 0;
+    width: 95vw;
+}
+
+.footer-left {
+    width: 50%;
+}
+
+.footer-right {
+    width: 45%;
+    text-align: right;
+}
+
+.app {
+    padding: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.app-left {
+    width: 50%;
+}
+.app-right {
+    width: 50%;
+}
+
+.title {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+.subtitle {
+    margin-top: 0.5em;
+    color: #A2A2A2;
+    font-weight: 300;
+    font-size: 25px;
+}
+
+.interaction-wrapper {
+    padding-top: 3em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.projects-selector {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 1em;
+    width: 11em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dropdown-visible {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.projects-selector:hover {
+    transition: 0.3s;
+}
+
+.dropdown-box {
+    display: none;
+    transition: 0.3s;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 1px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #A2A2A2;
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+.dropdown-wrapper {
+    margin-top: 1em;
+    border-top: 1px solid #A2A2A2;
+    display: flex;
+    flex-direction: column;
+    max-height: 21em;
+    overflow-y: scroll;
+}
+
+.projects-selector:hover .dropdown-box {
+    display: block;
+    transition: 0.3s;
+}
+
+#arrow-image {
+    width: 1em;
+}
+
+.dropdown-option {
+    padding: 0.4em;
+    border-radius: 5px;
+    margin-top: 0.5em;
+    text-decoration: none;
+    color: #A2A2A2;
+}
+
+.dropdown-option:hover {
+    color: black;
+    background-color: #F8F8F8;
+}
+
+.plot-explanation {
+    margin-top: 5em;
+    text-align: right;
+    font-size: 14px;
+    color: #A2A2A2;
+}
+
+.plots {
+    width: 110%;
+    margin-left: -3em;
+    margin-top: 2em;
+    opacity: 100%;
+}
+
+.matplotlib-output-image {
+    width: 100%;
+}
+
+#img-archiva {
+    display : none;
+}
+
+#archiva:active + #img-archiva {
+    display: block !important;
+}
