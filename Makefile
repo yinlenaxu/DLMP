@@ -16,6 +16,18 @@ else
 HAS_CONDA=True
 endif
 
+ifeq ($(OS),Windows_NT)
+    CCFLAGS = start
+else
+    UNAME_S := $(shell uname -s)
+endif
+ifeq ($(UNAME_S),Linux)
+    CCFLAGS = xdg-open
+endif
+ifeq ($(UNAME_S),Darwin)
+    CCFLAGS = open
+endif
+
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -32,7 +44,7 @@ data: requirements
 
 ## Make deploy
 deploy:
-	$ open reports/deploy/templates/index.html
+	$(CCFLAGS) reports/deploy/templates/index.html
 
 ## Delete all compiled Python files
 clean:
