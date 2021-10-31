@@ -144,14 +144,6 @@ body {
     opacity: 100%;
 }
 
-.matplotlib-output-image {
+#plot-image {
     width: 100%;
-}
-
-#img-archiva {
-    display : none;
-}
-
-#archiva:active + #img-archiva {
-    display: block !important;
 }

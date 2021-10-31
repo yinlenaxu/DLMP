@@ -26,34 +26,31 @@
                             </div>
                             <div class = "dropdown-box">
                                 <div class = "dropdown-wrapper">
-                                    <a class = "dropdown-option"  id = "archiva"  href="">archiva</a>
-                                    <a class = "dropdown-option"  id = "batik"  href="">batik</a>
-                                    <a class = "dropdown-option"  id = "bcel"  href="">bcel</a>
-                                    <a class = "dropdown-option"  id = "beanutils"  href="">beanutils</a>
-                                    <a class = "dropdown-option"  id = "cayenne"  href="">cayenne</a>
-                                    <a class = "dropdown-option"  id = "cocoon"  href="">cocoon</a>
-                                    <a class = "dropdown-option"  id = "commons-cli"  href="">commons-cli</a>
-                                    <a class = "dropdown-option"  id = "commons-exec"  href="">commons-exec</a>
-                                    <a class = "dropdown-option"  id = "commons-fileuploa"  href="">commons-fileupload</a>
-                                    <a class = "dropdown-option"  id = "commons-io"  href="">commons-io</a>
-                                    <a class = "dropdown-option"  id = "commons-jelly"  href="">commons-jelly</a>
-                                    <a class = "dropdown-option"  id = "commons-jexl"  href="">commons-jexl</a>
-                                    <a class = "dropdown-option"  id = "configuration"  href="">configuration</a>
-                                    <a class = "dropdown-option"  id = "daemon"  href="">daemon</a>
-                                    <a class = "dropdown-option"  id = "dbcp"  href="">dbcp</a>
-                                    <a class = "dropdown-option"  id = "dbutils"  href="">dbutils</a>
-                                    <a class = "dropdown-option"  id = "digester"  href="">digester</a>
-                                    <a class = "dropdown-option"  id = "felix"  href="">felix</a>
-                                    <a class = "dropdown-option"  id = "hive"  href="">hive</a>
-                                    <a class = "dropdown-option"  id = "httpclient"  href="">httpclient</a>
-                                    <a class = "dropdown-option"  id = "httpcore"  href="">httpcore</a>
-                                    <a class = "dropdown-option"  id = "jxpath"  href="">jxpath</a>
-                                    <a class = "dropdown-option"  id = "ognl"  href="">ognl</a>
-                                    <a class = "dropdown-option"  id = "santuario"  href="">santuario</a>
-                                    <a class = "dropdown-option"  id = "thrift"  href="">thrift</a>
-                                    <a class = "dropdown-option"  id = "validator"  href="">validator</a>
-                                    <a class = "dropdown-option"  id = "vfs"  href="">vfs</a>
-                                    <a class = "dropdown-option"  id = "zookeeper"  href="">zookeeper</a>
+                                    <div class = "dropdown-option" onclick="changeSource('archiva')" id = "archiva"  href="">archiva</div>
+                                    <div class = "dropdown-option" onclick="changeSource('batik')" id = "batik"  href="">batik</div>
+                                    <div class = "dropdown-option" onclick="changeSource('bcel')" id = "bcel"  href="">bcel</div>
+                                    <div class = "dropdown-option" onclick="changeSource('beanutils')" id = "beanutils"  href="">beanutils</div>
+                                    <div class = "dropdown-option" onclick="changeSource('cayenne')" id = "cayenne"  href="">cayenne</div>
+                                    <div class = "dropdown-option" onclick="changeSource('cocoon')" id = "cocoon"  href="">cocoon</div>
+                                    <div class = "dropdown-option" onclick="changeSource('commons-cli')" id = "commons-cli"  href="">commons-cli</div>
+                                    <div class = "dropdown-option" onclick="changeSource('commons-fileupload')" id = "commons-fileuploa"  href="">commons-fileupload</div>
+                                    <div class = "dropdown-option" onclick="changeSource('commons-io')" id = "commons-io"  href="">commons-io</div>
+                                    <div class = "dropdown-option" onclick="changeSource('commons-jelly')" id = "commons-jelly"  href="">commons-jelly</div>
+                                    <div class = "dropdown-option" onclick="changeSource('commons-jexl')" id = "commons-jexl"  href="">commons-jexl</div>
+                                    <div class = "dropdown-option" onclick="changeSource('configuration')" id = "configuration"  href="">configuration</div>
+                                    <div class = "dropdown-option" onclick="changeSource('daemon')" id = "daemon"  href="">daemon</div>
+                                    <div class = "dropdown-option" onclick="changeSource('dbcp')" id = "dbcp"  href="">dbcp</div>
+                                    <div class = "dropdown-option" onclick="changeSource('dbutils')" id = "dbutils"  href="">dbutils</div>
+                                    <div class = "dropdown-option" onclick="changeSource('digester')" id = "digester"  href="">digester</div>
+                                    <div class = "dropdown-option" onclick="changeSource('felix')" id = "felix"  href="">felix</div>
+                                    <div class = "dropdown-option" onclick="changeSource('httpclient')" id = "httpclient"  href="">httpclient</div>
+                                    <div class = "dropdown-option" onclick="changeSource('httpcore')" id = "httpcore"  href="">httpcore</div>
+                                    <div class = "dropdown-option" onclick="changeSource('jxpath')" id = "jxpath"  href="">jxpath</div>
+                                    <div class = "dropdown-option" onclick="changeSource('santuario')" id = "santuario"  href="">santuario</div>
+                                    <div class = "dropdown-option" onclick="changeSource('thrift')" id = "thrift"  href="">thrift</div>
+                                    <div class = "dropdown-option" onclick="changeSource('validator')" id = "validator"  href="">validator</div>
+                                    <div class = "dropdown-option" onclick="changeSource('vfs')" id = "vfs"  href="">vfs</div>
+                                    <div class = "dropdown-option" onclick="changeSource('zookeeper')" id = "zookeeper"  href="">zookeeper</div>
                                 </div>
                             </div>
                         </div>
@@ -67,34 +64,8 @@
                     In this plot, you will find how many faults have been generated by each type of refactor.
                 </div>
                 <div class = "plots">
-                    <img class = "hidden" id = "img-archiva" src = "static/test-image.png">
-                    <img class = "hidden" id = "img-batik" src = "">
-                    <img class = "hidden" id = "img-bcel" src = "">
-                    <img class = "hidden" id = "img-beanutils" src = "">
-                    <img class = "hidden" id = "img-cayenne" src = "">
-                    <img class = "hidden" id = "img-cocoon" src = "">
-                    <img class = "hidden" id = "img-commons-cli" src = "">
-                    <img class = "hidden" id = "img-commons-exec" src = "">
-                    <img class = "hidden" id = "img-commons-fileuploa" src = "">
-                    <img class = "hidden" id = "img-commons-io" src = "">
-                    <img class = "hidden" id = "img-commons-jelly" src = "">
-                    <img class = "hidden" id = "img-commons-jexl" src = "">
-                    <img class = "hidden" id = "img-configuration" src = "">
-                    <img class = "hidden" id = "img-daemon" src = "">
-                    <img class = "hidden" id = "img-dbcp" src = "">
-                    <img class = "hidden" id = "img-dbutils" src = "">
-                    <img class = "hidden" id = "img-digester" src = "">
-                    <img class = "hidden" id = "img-felix" src = "">
-                    <img class = "hidden" id = "img-hive" src = "">
-                    <img class = "hidden" id = "img-httpclient" src = "">
-                    <img class = "hidden" id = "img-httpcore" src = "">
-                    <img class = "hidden" id = "img-jxpath" src = "">
-                    <img class = "hidden" id = "img-ognl" src = "">
-                    <img class = "hidden" id = "img-santuario" src = "">
-                    <img class = "hidden" id = "img-thrift" src = "">
-                    <img class = "hidden" id = "img-validator" src = "">
-                    <img class = "hidden" id = "img-vfs" src = "">
-                    <img class = "hidden" id = "img-zookeeper" src = "">
+                    <img id = "plot-image" src = "../static/images/archiva.png">
+
                     
                 </div>
             </div>
@@ -109,4 +80,9 @@
         </div>
     </div>
 </body>
+<script>
+    function changeSource(name) {
+        document.getElementById("plot-image").src = "../static/images/"+name+".png"
+    }
+</script>
 </html>
